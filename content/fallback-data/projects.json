@@ -1,0 +1,22 @@
+[
+  {
+    "title": "[Placeholder — Project Title]",
+    "slug": "placeholder-project-one",
+    "client": "[Placeholder Client]",
+    "industry": "Real Estate",
+    "services": ["Brand Strategy", "Video Production"],
+    "summary": "[Placeholder summary — replace once real case study content is approved.]",
+    "heroImage": "/images/placeholder-project.jpg",
+    "featured": true
+  },
+  {
+    "title": "[Placeholder — Project Title]",
+    "slug": "placeholder-project-two",
+    "client": "[Placeholder Client]",
+    "industry": "Hospitality",
+    "services": ["Digital Marketing", "Photography"],
+    "summary": "[Placeholder summary — replace once real case study content is approved.]",
+    "heroImage": "/images/placeholder-project.jpg",
+    "featured": false
+  }
+]
