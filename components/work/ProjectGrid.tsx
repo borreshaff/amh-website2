@@ -6,7 +6,7 @@ export function ProjectGrid({ projects }: { projects: Project[] }) {
     return <p className="font-body text-white/50">Projects coming soon.</p>;
   }
 
-  const featured = projects[0];
+  const featured = projects[0] as Project;
   const rest = projects.slice(1);
 
   return (
