@@ -6,7 +6,8 @@ export function ProjectGrid({ projects }: { projects: Project[] }) {
     return <p className="font-body text-white/50">Projects coming soon.</p>;
   }
 
-  const [featured, ...rest] = projects;
+  const featured = projects[0];
+  const rest = projects.slice(1);
 
   return (
     <div className="grid gap-6">
