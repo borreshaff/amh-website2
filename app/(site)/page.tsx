@@ -11,9 +11,6 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* Stage 0–7: hero, logo reveal, and pinned H → camera → lens transform
-          all live inside this single pinned section so the WebGL scene stays
-          visible for the full scroll sequence. */}
       <section id="hero-transform" className="relative h-screen w-full overflow-hidden bg-black">
         <HeroCanvas />
         <HeroHtmlLayer />
