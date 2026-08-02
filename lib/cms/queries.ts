@@ -16,7 +16,7 @@ const FEATURED_PROJECTS_QUERY = `
 `;
 
 export async function getFeaturedProjects(): Promise<Project[]> {
-  if (!isCmsConfigured) {
+  if (!isCmsConfigured || !sanityClient) {
     return fallbackProjects as Project[];
   }
 
