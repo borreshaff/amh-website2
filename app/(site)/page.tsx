@@ -11,20 +11,15 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* Stage 0–1: hero + logo reveal */}
-      <section className="relative h-screen w-full overflow-hidden bg-black">
+      {/* Stage 0–7: hero, logo reveal, and pinned H → camera → lens transform
+          all live inside this single pinned section so the WebGL scene stays
+          visible for the full scroll sequence. */}
+      <section id="hero-transform" className="relative h-screen w-full overflow-hidden bg-black">
         <HeroCanvas />
         <HeroHtmlLayer />
       </section>
 
-      {/* Stage 2–7: pinned scroll transformation (H → camera → lens) */}
-      <section id="hero-transform" className="relative h-screen w-full bg-black" />
-
-      <Section
-        eyebrow="Selected Work"
-        title="Proof, not promises."
-        id="work"
-      >
+      <Section eyebrow="Selected Work" title="Proof, not promises." id="work">
         <ProjectGrid projects={projects} />
       </Section>
 
@@ -47,7 +42,7 @@ export default async function HomePage() {
         <p className="max-w-xl font-body text-white/70">
           Tell us about your business, your challenge, and what you want to achieve.
         </p>
-        <a
+        
           href="/start-a-project"
           className="mt-8 inline-block bg-gold px-8 py-3 font-body text-xs uppercase tracking-wide2 text-black"
         >
