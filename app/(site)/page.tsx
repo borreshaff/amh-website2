@@ -40,6 +40,7 @@ export default async function HomePage() {
           Tell us about your business, your challenge, and what you want to achieve.
         </p>
         
+        <a
           href="/start-a-project"
           className="mt-8 inline-block bg-gold px-8 py-3 font-body text-xs uppercase tracking-wide2 text-black"
         >
