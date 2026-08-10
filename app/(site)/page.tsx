@@ -1,6 +1,5 @@
 import { HeroCanvas } from "@/components/hero/HeroCanvas";
 import { HeroHtmlLayer } from "@/components/hero/HeroHtmlLayer";
-import { LogoOverlay } from "@/components/hero/LogoOverlay";
 import { Section } from "@/components/ui/Section";
 import { ProjectGrid } from "@/components/work/ProjectGrid";
 import { ServicePillars } from "@/components/services/ServicePillars";
@@ -14,7 +13,6 @@ export default async function HomePage() {
     <>
       <section id="hero-transform" className="relative h-screen w-full overflow-hidden bg-black">
         <HeroCanvas />
-        <LogoOverlay />
         <HeroHtmlLayer />
       </section>
 
