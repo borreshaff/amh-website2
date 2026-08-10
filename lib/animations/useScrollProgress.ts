@@ -6,33 +6,53 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
-  window.addEventListener("load", () => ScrollTrigger.refresh());
+  if ("scrollRestoration" in window.history) {
+    window.history.scrollRestoration = "manual";
+  }
 }
 
-/**
- * Drives a ref-backed 0→1 progress value across the pinned #hero-transform
- * section. Read inside useFrame() rather than via React state to avoid
- * re-render cost on every scroll tick.
- */
+// Shared across every consumer so only ONE pinned ScrollTrigger is ever
+// created for #hero-transform, no matter how many components (logo,
+// camera morph, etc.) read scroll progress. Multiple pins on the same
+// element was causing the scroll-position glitch.
+const sharedProgress = { current: 0 };
+let sharedTrigger: ScrollTrigger | null = null;
+let refCount = 0;
+
 export function useScrollProgress() {
-  const progressRef = useRef(0);
+  const localRef = useRef(sharedProgress);
 
   useEffect(() => {
-    const trigger = ScrollTrigger.create({
-      trigger: "#hero-transform",
-      start: "top top",
-      end: "+=280%", // ~280vh desktop; shortened via media query for mobile
-      scrub: 0.6,
-      pin: true,
-      onUpdate: (self) => {
-        progressRef.current = self.progress;
-      }
-    });
+    refCount += 1;
 
-    return () => trigger.kill();
+    if (!sharedTrigger) {
+      window.scrollTo(0, 0);
+      sharedTrigger = ScrollTrigger.create({
+        trigger: "#hero-transform",
+        start: "top top",
+        end: "+=280%",
+        scrub: 0.6,
+        pin: true,
+        onUpdate: (self) => {
+          sharedProgress.current = self.progress;
+        }
+      });
+    }
+
+    const refresh = () => ScrollTrigger.refresh();
+    window.addEventListener("load", refresh);
+    const timeout = setTimeout(refresh, 1000);
+
+    return () => {
+      refCount -= 1;
+      window.removeEventListener("load", refresh);
+      clearTimeout(timeout);
+      if (refCount === 0 && sharedTrigger) {
+        sharedTrigger.kill();
+        sharedTrigger = null;
+      }
+    };
   }, []);
 
-  // Returned as a ref (not state) so consumers can read .current inside
-  // useFrame() every tick without triggering React re-renders on scroll.
-  return progressRef;
+  return localRef.current;
 }

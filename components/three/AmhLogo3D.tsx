@@ -64,7 +64,7 @@ function AmhLogoMeshes() {
 
     const width = maxX - minX || 1;
     const height = maxY - minY || 1;
-    const s = 2.6 / Math.max(width, height);
+    const s = 3.8 / Math.max(width, height);
     const cx = (minX + maxX) / 2;
     const cy = (minY + maxY) / 2;
     const cz = depth / 2;

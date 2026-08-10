@@ -31,7 +31,7 @@ export function HeroHtmlLayer() {
   return (
     <div
       ref={containerRef}
-      className="relative z-10 flex h-screen flex-col items-center justify-end px-6 pb-20 text-center md:pb-28"
+      className="relative z-10 flex h-screen flex-col items-center justify-center px-6 text-center"
     >
       <h1 className="font-heading text-4xl uppercase leading-tight tracking-wide2 text-white md:text-6xl">
         Strategy in Motion.
@@ -56,7 +56,7 @@ export function HeroHtmlLayer() {
         </Link>
       </div>
 
-      <span className="mt-14 font-body text-[11px] uppercase tracking-wide3 text-white/40">
+      <span className="absolute bottom-10 font-body text-[11px] uppercase tracking-wide3 text-white/40">
         Scroll
       </span>
     </div>

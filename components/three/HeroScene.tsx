@@ -35,8 +35,8 @@ function CameraMorph() {
     if (!group) return;
 
     const spin = remap(p, 0.3, 1);
-    group.rotation.y = spin * Math.PI * 1.5;
-    group.rotation.x = spin * 0.2;
+    group.rotation.y = spin * THREE.MathUtils.degToRad(35);
+    group.rotation.x = spin * THREE.MathUtils.degToRad(8);
     group.scale.setScalar(0.9 + remap(p, 0.45, 0.6) * 0.15);
 
     const chassisIn = remap(p, 0.45, 0.6);
