@@ -161,8 +161,8 @@ function MorphGroup() {
         </mesh>
 
         {/* Lens mount collar */}
-        <mesh position={[0, 0, 0.4]}>
-          <cylinderGeometry args={[0.28, 0.3, 0.1, 24]} rotation={[Math.PI / 2, 0, 0]} />
+        <mesh position={[0, 0, 0.4]} rotation={[Math.PI / 2, 0, 0]}>
+          <cylinderGeometry args={[0.28, 0.3, 0.1, 24]} />
           <meshStandardMaterial color="#0d0d0d" metalness={0.8} roughness={0.3} transparent opacity={0} />
         </mesh>
 
