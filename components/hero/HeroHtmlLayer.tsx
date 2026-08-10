@@ -1,8 +1,38 @@
+"use client";
+
+import { useEffect, useRef } from "react";
 import Link from "next/link";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 export function HeroHtmlLayer() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    const trigger = ScrollTrigger.create({
+      trigger: "#hero-transform",
+      start: "top top",
+      end: "+=15%",
+      scrub: 0.6,
+      onUpdate: (self) => {
+        gsap.set(containerRef.current, { opacity: 1 - self.progress });
+      }
+    });
+
+    return () => trigger.kill();
+  }, []);
+
   return (
-    <div className="relative z-10 flex h-screen flex-col items-center justify-end px-6 pb-20 text-center md:pb-28">
+    <div
+      ref={containerRef}
+      className="relative z-10 flex h-screen flex-col items-center justify-end px-6 pb-20 text-center md:pb-28"
+    >
       <h1 className="font-heading text-4xl uppercase leading-tight tracking-wide2 text-white md:text-6xl">
         Strategy in Motion.
       </h1>
