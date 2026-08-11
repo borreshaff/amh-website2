@@ -77,7 +77,8 @@ function AmhLogoMeshes() {
         side: THREE.DoubleSide,
         polygonOffset: true,
         polygonOffsetFactor: 1,
-        polygonOffsetUnits: 1
+        polygonOffsetUnits: 1,
+        envMapIntensity: 0.4
       });
       built.push(new THREE.Mesh(geometry, material));
     });
