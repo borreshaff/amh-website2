@@ -3,6 +3,7 @@
 import { Suspense, useMemo, useRef } from "react";
 import { useFrame, useLoader } from "@react-three/fiber";
 import { SVGLoader } from "three/examples/jsm/loaders/SVGLoader.js";
+import { mergeVertices } from "three/examples/jsm/utils/BufferGeometryUtils.js";
 import * as THREE from "three";
 import { useScrollProgress } from "@/lib/animations/useScrollProgress";
 import { remap } from "./logoShapes";
@@ -11,6 +12,7 @@ function AmhLogoMeshes() {
   const data = useLoader(SVGLoader, "/images/logo-white.svg");
   const groupRef = useRef<THREE.Group>(null);
   const materialsRef = useRef<THREE.MeshStandardMaterial[]>([]);
+  const startTimeRef = useRef<number | null>(null);
   const progress = useScrollProgress();
 
   const { meshes, scale } = useMemo(() => {
@@ -51,11 +53,12 @@ function AmhLogoMeshes() {
     let maxY = -Infinity;
 
     allShapes.forEach((shape) => {
-      const geometry = new THREE.ExtrudeGeometry(shape, {
+      let geometry: THREE.BufferGeometry = new THREE.ExtrudeGeometry(shape, {
         depth,
         bevelEnabled: false,
         curveSegments: 12
       });
+      geometry = mergeVertices(geometry, 1e-4);
       geometry.computeVertexNormals();
       geometry.computeBoundingBox();
       const bb = geometry.boundingBox;
@@ -66,11 +69,11 @@ function AmhLogoMeshes() {
         maxY = Math.max(maxY, bb.max.y);
       }
       const material = new THREE.MeshStandardMaterial({
-        color: "#1a1a1a",
-        metalness: 0.6,
-        roughness: 0.5,
+        color: "#3a3a3a",
+        metalness: 0.5,
+        roughness: 0.4,
         transparent: true,
-        opacity: 1,
+        opacity: 0,
         side: THREE.DoubleSide,
         polygonOffset: true,
         polygonOffsetFactor: 1,
@@ -94,9 +97,11 @@ function AmhLogoMeshes() {
     return { meshes: built, scale: s };
   }, [data]);
 
-  useFrame(({ camera }) => {
+  useFrame(({ camera, clock }) => {
     const group = groupRef.current;
     if (!group) return;
+    if (startTimeRef.current === null) startTimeRef.current = clock.getElapsedTime();
+    const fadeIn = Math.min((clock.getElapsedTime() - startTimeRef.current) / 1.2, 1);
     const p = progress.current;
 
     const settle = remap(p, 0, 0.08);
@@ -107,7 +112,7 @@ function AmhLogoMeshes() {
     const fadeOut = 1 - remap(p, 0.28, 0.45);
     const colorT = remap(p, 0, 0.28);
     materialsRef.current.forEach((material) => {
-      material.opacity = fadeOut;
+      material.opacity = fadeIn * fadeOut;
       material.color.lerpColors(new THREE.Color("#1a1a1a"), new THREE.Color("#c4c4cc"), Math.min(colorT * 1.2, 1));
       material.metalness = 0.55 + colorT * 0.35;
       material.roughness = 0.55 - colorT * 0.3;

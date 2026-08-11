@@ -143,7 +143,7 @@ export function HeroScene() {
       gl={{ antialias: true, powerPreference: "high-performance" }}
       dpr={[1, 2]}
     >
-      <ambientLight intensity={0.4} />
+      <ambientLight intensity={0.75} />
       <spotLight position={[3, 4, 5]} angle={0.3} penumbra={0.6} intensity={1.2} color="#c4c4cc" />
       <pointLight position={[-4, -2, -3]} intensity={0.3} color="#ffffff" />
       <Environment preset="city" />
