@@ -42,8 +42,10 @@ function AmhLogoMeshes() {
         bevelEnabled: true,
         bevelThickness: depth * 0.15,
         bevelSize: depth * 0.15,
-        bevelSegments: 2
+        bevelSegments: 3,
+        curveSegments: 12
       });
+      geometry.computeVertexNormals();
       geometry.computeBoundingBox();
       const bb = geometry.boundingBox;
       if (bb) {
@@ -58,6 +60,7 @@ function AmhLogoMeshes() {
         roughness: 0.5,
         transparent: true,
         opacity: 1,
+        side: THREE.DoubleSide,
         polygonOffset: true,
         polygonOffsetFactor: 1,
         polygonOffsetUnits: 1
