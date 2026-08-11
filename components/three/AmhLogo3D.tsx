@@ -31,7 +31,7 @@ function AmhLogoMeshes() {
       return size.x * size.y;
     });
     const maxArea = Math.max(...areas, 0.0001);
-    const allShapes = rawShapes.filter((_, i) => areas[i] > maxArea * 0.01);
+    const allShapes = rawShapes.filter((_, i) => (areas[i] ?? 0) > maxArea * 0.01);
 
     let fMinY = Infinity;
     let fMaxY = -Infinity;
