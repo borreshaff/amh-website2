@@ -100,7 +100,7 @@ function AmhLogoMeshes() {
   });
 
   return (
-    <group ref={groupRef} position={[0, 0.2, 0]}>
+    <group ref={groupRef} position={[-0.5, 0.05, 0]}>
       <group scale={[scale, -scale, scale]}>
         {meshes.map((mesh, i) => (
           <primitive key={i} object={mesh} />
