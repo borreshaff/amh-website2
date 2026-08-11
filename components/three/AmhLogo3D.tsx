@@ -53,10 +53,7 @@ function AmhLogoMeshes() {
     allShapes.forEach((shape) => {
       const geometry = new THREE.ExtrudeGeometry(shape, {
         depth,
-        bevelEnabled: true,
-        bevelThickness: depth * 0.15,
-        bevelSize: depth * 0.15,
-        bevelSegments: 3,
+        bevelEnabled: false,
         curveSegments: 12
       });
       geometry.computeVertexNormals();
