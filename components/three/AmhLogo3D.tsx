@@ -14,10 +14,24 @@ function AmhLogoMeshes() {
   const progress = useScrollProgress();
 
   const { meshes, scale } = useMemo(() => {
-    const allShapes: THREE.Shape[] = [];
+    const rawShapes: THREE.Shape[] = [];
     data.paths.forEach((path) => {
-      allShapes.push(...SVGLoader.createShapes(path));
+      rawShapes.push(...SVGLoader.createShapes(path));
     });
+
+    // Filter out tiny stray shapes (registration marks, cut guides, or
+    // duplicate artifacts sometimes left in exported SVGs) by comparing
+    // each shape's bounding-box area against the largest shape found.
+    // Real letter strokes are always a substantial fraction of the
+    // biggest shape; artifacts are orders of magnitude smaller.
+    const areas = rawShapes.map((shape) => {
+      const box = new THREE.Box2().setFromPoints(shape.getPoints());
+      const size = new THREE.Vector2();
+      box.getSize(size);
+      return size.x * size.y;
+    });
+    const maxArea = Math.max(...areas, 0.0001);
+    const allShapes = rawShapes.filter((_, i) => areas[i] > maxArea * 0.01);
 
     let fMinY = Infinity;
     let fMaxY = -Infinity;
