@@ -57,7 +57,10 @@ function AmhLogoMeshes() {
         metalness: 0.6,
         roughness: 0.5,
         transparent: true,
-        opacity: 1
+        opacity: 1,
+        polygonOffset: true,
+        polygonOffsetFactor: 1,
+        polygonOffsetUnits: 1
       });
       built.push(new THREE.Mesh(geometry, material));
     });
@@ -91,7 +94,7 @@ function AmhLogoMeshes() {
     const colorT = remap(p, 0, 0.28);
     materialsRef.current.forEach((material) => {
       material.opacity = fadeOut;
-      material.color.lerpColors(new THREE.Color("#1a1a1a"), new THREE.Color("#c9a24e"), Math.min(colorT * 1.2, 1));
+      material.color.lerpColors(new THREE.Color("#1a1a1a"), new THREE.Color("#c4c4cc"), Math.min(colorT * 1.2, 1));
       material.metalness = 0.55 + colorT * 0.35;
       material.roughness = 0.55 - colorT * 0.3;
     });

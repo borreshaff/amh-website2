@@ -17,7 +17,7 @@ function opacityFor(materials: THREE.Material[], value: number) {
 }
 
 function setColorMetal(material: THREE.MeshStandardMaterial, t: number) {
-  material.color.lerpColors(new THREE.Color("#1a1a1a"), new THREE.Color("#c9a24e"), Math.min(t * 1.3, 1));
+  material.color.lerpColors(new THREE.Color("#1a1a1a"), new THREE.Color("#c4c4cc"), Math.min(t * 1.3, 1));
   material.metalness = 0.55 + t * 0.35;
   material.roughness = 0.55 - t * 0.3;
 }
@@ -93,8 +93,8 @@ function CameraMorph() {
         <mesh ref={lensRef} position={[0, 0, 0.91]} rotation={[Math.PI / 2, 0, 0]}>
           <cylinderGeometry args={[0.22, 0.22, 0.03, 24]} />
           <meshStandardMaterial
-            color="#c9a24e"
-            emissive="#c9a24e"
+            color="#c4c4cc"
+            emissive="#c4c4cc"
             emissiveIntensity={0}
             metalness={0.9}
             roughness={0.1}
@@ -121,7 +121,7 @@ function CameraMorph() {
         {[-0.15, 0, 0.15].map((x, i) => (
           <mesh key={i} position={[x, 0.38, 0.15]}>
             <cylinderGeometry args={[0.03, 0.03, 0.02, 12]} />
-            <meshStandardMaterial color="#c9a24e" metalness={0.8} roughness={0.3} transparent opacity={0} />
+            <meshStandardMaterial color="#c4c4cc" metalness={0.8} roughness={0.3} transparent opacity={0} />
           </mesh>
         ))}
 
@@ -144,7 +144,7 @@ export function HeroScene() {
       dpr={[1, 2]}
     >
       <ambientLight intensity={0.4} />
-      <spotLight position={[3, 4, 5]} angle={0.3} penumbra={0.6} intensity={1.2} color="#c9a24e" />
+      <spotLight position={[3, 4, 5]} angle={0.3} penumbra={0.6} intensity={1.2} color="#c4c4cc" />
       <pointLight position={[-4, -2, -3]} intensity={0.3} color="#ffffff" />
       <Environment preset="city" />
       <AmhLogo3D />
