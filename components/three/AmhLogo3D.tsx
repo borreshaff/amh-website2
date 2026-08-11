@@ -113,9 +113,9 @@ function AmhLogoMeshes() {
     const colorT = remap(p, 0, 0.28);
     materialsRef.current.forEach((material) => {
       material.opacity = fadeIn * fadeOut;
-      material.color.lerpColors(new THREE.Color("#1a1a1a"), new THREE.Color("#c4c4cc"), Math.min(colorT * 1.2, 1));
-      material.metalness = 0.55 + colorT * 0.35;
-      material.roughness = 0.55 - colorT * 0.3;
+      material.color.lerpColors(new THREE.Color("#3a3a3a"), new THREE.Color("#c4c4cc"), Math.min(colorT * 1.2, 1));
+      material.metalness = 0.5 + colorT * 0.35;
+      material.roughness = 0.4 - colorT * 0.3;
     });
 
     camera.position.z = 5 - remap(p, 0, 0.3) * 0.6;
