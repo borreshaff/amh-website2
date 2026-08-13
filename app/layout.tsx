@@ -37,6 +37,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${montserrat.variable} ${inter.variable}`}>
       <body>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:bg-gold focus:px-4 focus:py-2 focus:font-body focus:text-sm focus:text-black"
+        >
+          Skip to main content
+        </a>
         <SiteHeader />
         <main id="main-content">{children}</main>
         <SiteFooter />
